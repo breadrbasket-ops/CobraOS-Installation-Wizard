@@ -1,0 +1,60 @@
+# CobraOSServers
+
+> The core userland server suite for **CobraOS** — the retro-futuristic operating system powered by the **CMK (Cobra Micro-Kernel)**.
+
+## 🐍 What is `CobraOSServers`?
+
+`CobraOSServers` is a **single executable binary** (or collection of micro-services) that runs in **user mode** on top of the CMK microkernel. It provides essential system functionality that *does not belong in the kernel*, following the microkernel philosophy:
+
+- **No drivers in kernel space**
+- **No filesystem in kernel space**
+- **No GUI in kernel space**
+
+Instead, these run as **trusted userland servers**, communicating with apps and CMK via **fast asynchronous message passing**.
+
+## 🔧 Included Servers (v0.1)
+
+| Server        | Role                                  | Port Name     |
+|---------------|---------------------------------------|---------------|
+| `consrv`      | Console I/O (text output, keyboard)   | `ConsolePort` |
+| `gfxsrv`      | Framebuffer access, window primitives| `GfxPort`     |
+| `filesrv`     | ISO9660/FAT12 file system reader      | `FilePort`    |
+| `workbench`   | Desktop environment & icon manager    | `WBPort`      |
+| `netsrv`      | (Future) Minimal TCP/IP stack         | `NetPort`     |
+
+> 💡 All servers start automatically at boot. Apps send messages to their ports to request services.
+
+## 🛠️ Build Instructions
+
+`CobraOSServers` is written in **C** and compiled with the **CobraOS cross-compiler**:
+
+```bash
+# From the CobraOS root directory
+make servers
+
+bin/CobraOSServers  # Single static binary (linked with libcobra)
+
+
+---
+
+### 🗂️ Repo Structure Suggestion
+
+
+---
+
+### ✅ Next Steps for Open-Sourcing
+
+1. **Create a GitHub/GitLab repo**  
+   Name: `CobraOS`  
+   Description: *"A lean, Amiga-inspired OS with CMK microkernel. Fast, open, and retro-futuristic."*
+
+2. **Add LICENSE**  
+   MIT License is beginner-friendly and permissive.
+
+3. **Write main `README.md`**  
+   Explain the vision, how to build, how to run in QEMU.
+
+4. **Tag your first release**  
+   Even if it just prints “CobraOS v0.1” — it’s a milestone!
+
+---
